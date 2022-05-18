@@ -1,0 +1,318 @@
+:root {
+
+    /*Tipografía*/
+
+    --font-general: Arial, Helvetica, sans-serif;
+  
+    /* COLORS */
+    --background-color: gray;
+    --black-color: black;
+    --sky-color: #ccefff;
+    --bush-color: #58bd60;
+    --land-color: #b7574d;
+    --bunny-color: white;
+    --bunny-ears-color: pink;
+  }
+  
+  *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body{
+    font-size: 1.3rem ;
+    font-family: var(--font-general);
+    background-color: var(--background-color);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--background-color);
+    margin: 5rem 0;
+}
+
+/* titulo principal */
+
+.container__titulo-principal{
+    text-align: center;
+    font-size: 2rem;
+    margin: 3rem 1rem;
+    color: black;
+}
+
+/* phone */
+
+.container__phone {
+  counter-reset: score;
+  height: 600px;
+  width: 300px;
+  background-color: var(--sky-color);
+  border-radius: 40px;
+  border: 6px solid var(--black-color);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 1.9rem 3.8rem rgba(0, 0, 0, 0.3),
+    0 1.5rem 1.2rem rgba(0, 0, 0, 0.22);
+  
+}
+
+/* titulo del juego */
+
+.container__container-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container__title {
+  color: var(--land-color);
+  font-family: cursive;
+  font-size: 3.2rem;
+  margin: 2rem 2rem 0rem 2rem;
+}
+
+/* score */
+
+.container__total-count{
+  color: var(--black-color);
+  font-family: cursive;
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+.container__total-count::after {
+  content: " " counter(score);
+}
+
+/* conejos posiciones */
+
+.layer{
+  /*background-color: rebeccapurple;*/
+  position: relative;
+  height: 19.5rem;
+  width: 7.6rem;
+}
+
+.layer--position-rabbit-1{
+  z-index: 0;
+  top: 11rem;
+  left: 5rem;
+}
+
+.layer--position-rabbit-2{
+  z-index: 0;
+  top: -8.5rem;
+  left: 17rem;
+}
+
+.layer--position-rabbit-3{
+  z-index: 2;
+  top: -13rem;
+  left: 5rem;
+}
+
+.layer--position-rabbit-4{
+  z-index: 4;
+  top: -23rem;
+  left: 18rem;
+}
+
+/* input checkbox - click conejos */
+
+.layer__rabbit-input-check{
+  position: absolute;
+  visibility: hidden;
+}
+
+.layer__rabbit-input-check:checked{
+  counter-increment: score;
+}
+
+.layer__rabbit-input-check:checked + .layer__rabbit-label {
+  animation-name: die;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.layer__rabbit-label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*background-color: red;*/
+  width: 100%;
+  height: 11.5rem;
+  cursor: pointer;
+  animation-duration: 0.45s;
+  animation: jump infinite alternate;
+}
+
+/* velocidad conejos */
+
+.layer__rabbit-label--velocity-rabbit-1 {
+  animation-duration: 0.45s;
+}
+
+.layer__rabbit-label--velocity-rabbit-2 {
+  animation-duration: 0.5s;
+}
+
+.layer__rabbit-label--velocity-rabbit-3 {
+  animation-duration: 0.4s;
+}
+
+.layer__rabbit-label--velocity-rabbit-4 {
+  animation-delay: 0.1s;
+  animation-duration: 0.7s;
+}
+
+/* estructura conejos */
+
+.layer__head{
+  background-color: var(--bunny-color);
+  height: 7rem;
+  width: 7rem;
+  border-radius: 100%;
+  position: absolute;
+  top: 4.3rem;
+  left: 0.3rem;
+  z-index: 2;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.layer__eye{
+  background-color: var(--black-color);
+  width: 0.6em;
+  height: 0.6rem;
+  border-radius: 50%;
+  margin-top: 2.5rem;
+  animation-name: blink;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.layer__ears{
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  bottom: 5rem;
+  display: flex;
+  justify-content: space-evenly;
+  
+}
+
+.layer__ear-outer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  width: 2.2rem;
+  background-color: var(--bunny-color);
+  border-radius: 90%;
+}
+
+.layer__ear-inner{
+  background-color: var(--bunny-ears-color);
+  width: 1.5rem;
+  height: 5rem;
+  border-radius: 90%;
+}
+
+/* animaciones conejos */
+
+@keyframes blink {
+  0% {
+    transform: scaleY(1);
+  }
+  5% {
+    transform: scaleY(0.2);
+  }
+  15% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(80px);
+  }
+}
+
+@keyframes die {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+  25% {
+    transform: translateX(20px) translateY(10px);
+  }
+  50% {
+    transform: translateX(-20px) translateY(20px);
+  }
+  75% {
+    transform: translateX(20px) translateY(40px);
+  }
+  100% {
+    transform: translateX(0px) translateY(80px);
+  }
+}
+
+/* montañas - tierra - arbusto */
+
+.layer-land{
+  background-color: var(--land-color);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  position: absolute;
+  bottom: 0;
+  box-shadow: inset -2px 2px 8px rgba(0, 0, 0, 0.25);;
+}
+
+.layer-land--height-position-1{
+  width: 18rem;
+  height: 25rem;
+  left: 0;
+  z-index: 3;
+}
+
+.layer-land--height-position-2{
+  width: 23rem;
+  height: 15.50rem;
+  right: 0;
+  z-index: 5;
+}
+
+.layer-land--height-position-3{
+  width: 23rem;
+  height: 40rem;
+  left: 3.5rem;
+  z-index: 1;
+}
+
+.layer-land__bush{
+  width: 100%;
+  height: 6rem;
+  background-color: var(--bush-color);
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
